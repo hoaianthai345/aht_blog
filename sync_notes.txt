@@ -1,0 +1,3 @@
+rsync -av --delete "/Users/anhoaithai/Documents/AHT/2. AREAS/AI note/" "/Users/anhoaithai/Documents/AHT/1. PROJECTS/AIO25/4. Blog/aht_quartz/my-notes/content/"
+npx quartz build --serve
+npx quartz sync

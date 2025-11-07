@@ -21,6 +21,7 @@ Tag:
 > # Tham khảo
 # Levenshtein Distance
 **Khoảng cách chỉnh sửa văn bản Levenshtein**
+
 **Bài toán:** Viết chương trình tính khoảng cách chỉnh sửa tối thiểu Levenshtein. Khoảng cách Levenshtein thể hiện khoảng cách khác biệt giữa 2 chuỗi ký tự. Khoảng cách Levenshtein giữa chuỗi S và chuỗi T là số bước ít nhất biến chuỗi S thành chuỗi T thông qua 3 phép biến đổi là:
 - Xoá một ký tự
 - Thêm một ký tự
