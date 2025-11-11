@@ -1,5 +1,16 @@
 # Track 2
 # 1. Mô tả đề và nội quy
+![[image-184.png]]
+
+**Track 2**
+![[image-185.png]]
+![[image-186.png]]
+![[image-187.png]]
+
+Dữ liệu mẫu:
+![[image-188.png]]
+![[image-189.png]]
+![[image-190.png]]
 
 # 2. Kinh nghiệm các cuộc thi
 ## Xếp hạng
@@ -61,15 +72,9 @@ Không nên dùng RAG vì đã sử dụng các model 7 B (tức ra rất tốt 
 ## Các hướng nên thực hiện
 - Ensemble learning
 - Reinformance learning
-
-
-
 ## Các keyword cần tìm hiểu
 - SST
 - RL
 
-
 # Phần cứng
 Dùng trên google colab T 4 là ngang với cấu hình của btc đề xuất rồi.
-
-
