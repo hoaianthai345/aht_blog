@@ -9,14 +9,14 @@ import * as Plugin from "./quartz/plugins"
 const config: QuartzConfig = {
   configuration: {
     pageTitle: "An Hoai Thai's Notes",
-    pageTitleSuffix: "",
+    pageTitleSuffix: "– Notes by AHT",
     enableSPA: true,
     enablePopovers: true,
     analytics: {
       provider: "plausible",
     },
-    locale: "en-US",
-    baseUrl: "quartz.jzhao.xyz",
+    locale: "vi-VN",
+    baseUrl: "https://aht-blog.vercel.app",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {
