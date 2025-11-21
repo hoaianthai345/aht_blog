@@ -17,7 +17,7 @@ const config: QuartzConfig = {
     },
     locale: "vi-VN",
     baseUrl: "https://aht-blog.vercel.app",
-    ignorePatterns: ["private", "templates", ".obsidian"],
+    ignorePatterns: ["private", "templates", ".obsidian", "99_Assets"],
     defaultDateType: "modified",
     theme: {
       fontOrigin: "googleFonts",
