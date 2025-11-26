@@ -1,4 +1,4 @@
-2***
+
 **Hình thức lớp học:**
 - Vắng KP mỗi buổi, trừ -2đ chuyên cần
 - Vắng CP mỗi buổi, trừ -1đ chuyên cần

@@ -1,9 +1,7 @@
 ---
 Title: An Hoai Thai’s Garden
 Description: Digital Garden by Thái Hoài An
-Date: 2025-11-12
 ---
-
 # 🌿 AHT's Garden
 
 > *Hello World! I'm Thái Hoài An*
