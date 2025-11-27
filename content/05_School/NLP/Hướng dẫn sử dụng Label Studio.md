@@ -49,6 +49,8 @@ Lúc này khi về lại Project và select từng mẫu chúng ta có thể lab
 Dùng label studio gán thẻ 
 Ngoài ra, nên cài thêm cái này (thư viện dịch Thuật trực tiếp en-vi cho Python):
 https://pypi.org/project/optimumEasyNMT/?Utm_source=chatgpt.com#:~:text=Installation%20for%20Python
+	Nói thêm về EasyNMT: 
+
 Và nên cài bộ từ điển 5 GB (cuộn cuối trang, có Tên thư viện):
 https://pypi.org/project/optimumEasyNMT/?Utm_source=chatgpt.com
 

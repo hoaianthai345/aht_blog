@@ -17,6 +17,8 @@ Yêu cầu:
 - Phân tích đánh giá so sánh
 - Ứng dụng cụ thể (Gradio)
 
+Có thể dùng thêm EasyNTM để hỗ trợ dịch thuật, so sánh hai phiên bản để đánh giá.
+
 Báo cáo:
 - 40-50 trang
 ***
