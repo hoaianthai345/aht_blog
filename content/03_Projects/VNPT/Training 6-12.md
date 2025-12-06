@@ -30,12 +30,15 @@ Gợi ý: Sử dụng các thư viện mã nguồn mở, đăng ký voice-print 
 Nếu muốn trao đổi thêm với mentor hoặc LPBank thì qua kênh nào?
 - Vòng 1: Liên hệ trực tiếp với BTC qua telegram
 - Vòng 2: Làm việc trực tiếp với Mentor
+
 Có được sử dụng VNPT và API bên ngoài không?
 - Không nên dùng API bên ngoài vì tính rủi ro bảo mật, pháp lý.
 - Track 1: không giới hạn về sử dụng API nhưng track 2 sẽ quan tâm tính bảo mật.
 - Tuy nhiên có thể sử dụng nếu có sự tư vấn và nếu thật sự cần. (tuy nhiên chỉ quan tâm ở vòng 2)
+
 Khi nào VNPT cung cấp account và api key?
 - Qua vòng 1 mới bắt đầu xây dựng sản phẩm nên giờ chưa cần.
 - Nên là cần tập trung vào ý tưởng thật sự hay và nổi bật.
+
 Tạo deployable prototype hay phải deploy luôn?
 - Vì thời gian có hạn nên như nào cũng được. Tuy nhiên nếu deploy được thì sẽ đánh giá cao hơn. Có thể nhờ hỗ trợ server, máy ảo.
