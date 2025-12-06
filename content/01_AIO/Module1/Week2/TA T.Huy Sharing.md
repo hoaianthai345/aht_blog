@@ -7,6 +7,7 @@ Day/Week:
 Status: Not started
 Tag:
   - AIO
+draft: true
 ---
 Tổ chức nhóm
 tốt nhất là 3

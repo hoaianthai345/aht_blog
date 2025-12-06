@@ -7,20 +7,7 @@ Status: Not started
 Tag:
   - AIO
 ---
-> [!important] **Table of Content**
-> 
-> ---
-> 
-> - [[#Tham khảo]]
->     - [[#Phụ thuộc hàm (Functional Dependency)]]
->     - [[#Phụ thuộc đa trị (Multivalued Dependency – MVD)]]
-> 
->   
-
-> [!important]
-> 
-> # Tham khảo
-  
+# 1. **Entity Relationship Diagram**
 ### Phụ thuộc hàm (Functional Dependency)
 - **Định nghĩa:** Trong một quan hệ $R$, một thuộc tính (hoặc tập thuộc tính) $X$ được gọi là **xác định** một thuộc tính (hoặc tập thuộc tính) $Y$ nếu và chỉ nếu với **mọi bộ dữ liệu** có cùng giá trị ở $X$, thì các giá trị ở $Y$ cũng giống nhau.
 - Ký hiệu:
@@ -44,3 +31,6 @@ Trong quan hệ **SINHVIEN(MSSV, MonHoc, SoThich)**:
 - Mối quan hệ:
     
     $MSSV \twoheadrightarrow MonHoc \quad \text{và} \quad MSSV \twoheadrightarrow SoThich$
+
+# 2. **Database Normalization**
+Chuẩn hóa Database ^836244
