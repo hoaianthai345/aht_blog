@@ -1,3 +1,31 @@
+---
+draft: true
+---
+
+# Cấu trúc CV chuẩn
+![[image-269.png]]
+Bảy điểm vàng CV chuẩn
+1. Format đơn giản & đi thẳng vào trọng tâm
+
+
+Chữ đen trên nên trắng, tối đa 1-2 font chữ.
+- Không dùng màu mè hay mẫu thiết kế sáng tạo; nhà tuyển dụng quan tâm đến kinh nghiệm của bạn, không phải kỹ năng thiết kế, trừ khi bạn apply vào vị trí UX/UI designer
+- Tên file: Firstname_Lastname_CV.pd
+
+1. Phần tóm tắt tùy chỉnh (màu vàng
+2. 
+3. - Ở ngay dưới CV, hãy viết một đoạn tóm tắt ngăn, khớp
+4. chính xác kỹ năng của bạn với mô tả công việc.
+5. - Mục tiêu: Khiến nhà tuyển dụng không thể nghĩ "không
+6. phù hợp"
+
+## Mẫu Cv
+![[image-270.png]]
+
+AI engineer
+![[image-271.png]]
+
+
 # Định vị Learning type
 ## Trắc nghiệm
 Mục tiêu | Objectives:  
