@@ -392,7 +392,7 @@ Nếu lấy n = 30, 50, 100…, thì **độ bất định của kết quả tha
 
 ---
 
-Khi mới được giới thiệu, bootstrap vấp phải **nhiều hoài nghi**; với nhiều người, nó giống như việc **“luyện vàng từ rơm”**. Sự hoài nghi này bắt nguồn từ **hiểu lầm về mục đích của bootstrap**.
+Khi mới được giới thiệu, bootstrap vấp phải **nhiều hoài nghi**; với nhiều người, nó giống như việc tạo ra những thông tin mới từ lượng dữ liệu hạn hẹp. Sự hoài nghi này bắt nguồn từ **hiểu lầm về mục đích của bootstrap**.
 
 Bootstrap **không bù đắp cho kích thước mẫu nhỏ**; nó **không tạo ra dữ liệu mới**, cũng **không lấp đầy các khoảng trống** trong một tập dữ liệu hiện có. Bootstrap **chỉ cho chúng ta biết**: nếu ta có thể rút rất nhiều mẫu bổ sung từ một **tổng thể ví dụ như mẫu ban đầu của chúng ta**, thì các thống kê hay tham số mô hình sẽ **biến thiên như thế nào**.
 
@@ -432,7 +432,7 @@ Con người có xu hướng **khó chấp nhận sự không chắc chắn**; m
 
 Khoảng tin cậy **luôn đi kèm với một mức độ bao phủ**, được biểu diễn bằng một tỷ lệ phần trăm cao, chẳng hạn **90%** hoặc **95%**. 
 
-Ở đây chúng ta sẽ học cách ước lượng đại lượng thống kê dùng kỹ thuật Bootstrap thay vì truyền thống. Một cách để hiểu **khoảng tin cậy 90%** là: đó là khoảng bao phủ **90% phần trung tâm** của **phân phối lấy mẫu bootstrap** của một thống kê mẫu.
+Ở đây chúng ta sẽ học cách ước lượng đại lượng thống kê dùng kỹ thuật Bootstrap thay vì truyền thống. Một cách để hiểu **khoảng tin cậy 90%** là: đó là khoảng bao phủ **90% phần trung tâm** của **phân phối lấy mẫu theo phương pháp bootstrap** của một thống kê mẫu.
 
 Tổng quát hơn, một **khoảng tin cậy x%** quanh một ước lượng mẫu, **về trung bình**, sẽ chứa các ước lượng mẫu tương tự **x% số lần**, khi cùng một quy trình lấy mẫu được áp dụng.
 
@@ -459,6 +459,8 @@ Hình sau minh họa **khoảng tin cậy 90%** cho **thu nhập trung bình h�
 
 Bootstrap là một công cụ **tổng quát**, có thể dùng để xây dựng khoảng tin cậy cho **hầu hết các thống kê** hoặc **tham số mô hình**. 
 Các giáo trình và phần mềm thống kê—vốn được phát triển từ thời kỳ phân tích thống kê **chưa có máy tính**—cũng thường đề cập đến các khoảng tin cậy được xây dựng bằng **công thức**, đặc biệt là dựa trên **phân phối t**. Nhược điểm của phương pháp truyền thống là để ước lượng chính xác chúng ta cần phải có các giả định như có trước phương sai tổng, nếu không có phương sai tổng thì phải giả định dữ liệu tuân theo phân phối chuẩn.
+
+Nói như vậy không phải là Bootstrap không có điểm yếu, chúng ta có thể thấy Bootstrap sẽ phụ thuộc rất nhiều vào chất lượng của mẫu. Bootstrap yêu cầu giả định rằng Mẫu quan sát phải **đại diện tốt cho tổng thể** (vì thế nếu mẫu rất nhỏ hoặc không đại diện tốt thì thật ra cũng không quá tốt), tiếp theo là rõ ràng việc lấy mẫu Bootstrap và tính toán nhiều lần sẽ đánh đổi là chi phí tính toán cao.
 
 ---
 
@@ -496,5 +498,574 @@ Tỷ lệ phần trăm gắn với khoảng tin cậy được gọi là **mức
 - **Mức độ tin cậy càng thấp** (bạn chấp nhận ít chắc chắn hơn), thì **khoảng tin cậy càng hẹp**.
     
 - **Bootstrap** là một phương pháp hiệu quả để xây dựng **khoảng tin cậy**.
+
+# 6. Phân phối chuẩn (Normal Distribution)
+Phân phối chuẩn có dạng đường cong hình chuông là một biểu tượng kinh điển trong thống kê truyền thống. Thực tế rằng **phân phối của các thống kê mẫu** thường có dạng gần giống phân phối chuẩn đã khiến nó trở thành một công cụ rất mạnh trong việc phát triển các công thức toán học dùng để **xấp xỉ các phân phối này**.
+
+---
+
+**Các thuật ngữ chính liên quan đến phân phối chuẩn**
+
+**Error (Sai số)**  
+Sự khác biệt giữa một giá trị dữ liệu quan sát và một giá trị dự đoán hoặc giá trị trung bình.
+
+**Standardize (Chuẩn hóa)**  
+Lấy giá trị dữ liệu trừ đi trung bình rồi chia cho độ lệch chuẩn.
+
+**z-score (Điểm z)**  
+Kết quả của việc chuẩn hóa một giá trị dữ liệu riêng lẻ.
+
+**Standard normal (Phân phối chuẩn tắc)**  
+Phân phối chuẩn có trung bình bằng 0 và độ lệch chuẩn bằng 1.
+
+**QQ-Plot**  
+Biểu đồ dùng để trực quan hóa mức độ gần đúng giữa phân phối của mẫu và một phân phối cho trước, ví dụ như phân phối chuẩn.
+
+---
+
+Trong một phân phối chuẩn, **68% dữ liệu** nằm trong khoảng **một độ lệch chuẩn** quanh giá trị trung bình, và **95% dữ liệu** nằm trong khoảng **hai độ lệch chuẩn** quanh giá trị trung bình.
+
+![[image-360.png]]
+
+Một quan niệm sai lầm phổ biến là cho rằng phân phối chuẩn được gọi là “chuẩn” vì hầu hết dữ liệu đều tuân theo phân phối này — tức là đó là dạng “bình thường”. Trên thực tế, **phần lớn các biến trong một dự án khoa học dữ liệu điển hình — thậm chí hầu hết dữ liệu thô — không tuân theo phân phối chuẩn**.
+
+Giá trị của phân phối chuẩn xuất phát từ thực tế rằng **nhiều thống kê** (statistics) lại **tuân theo phân phối chuẩn trong phân phối lấy mẫu của chúng**. Tuy vậy, các giả định về tính chuẩn thường chỉ được dùng như **giải pháp cuối cùng**, khi không có sẵn các phân phối xác suất thực nghiệm hoặc phân phối bootstrap.
+
+Đường cong hình chuông tuy mang tính biểu tượng, nhưng có lẽ đã được đánh giá quá cao. George W. Cobb, một nhà thống kê học tại Mount Holyoke nổi tiếng với các đóng góp trong triết lý giảng dạy thống kê nhập môn, đã lập luận trong một bài xã luận tháng 11 năm 2015 trên tạp chí _The American Statistician_ rằng: _“Khóa học thống kê nhập môn tiêu chuẩn, đặt phân phối chuẩn làm trung tâm, đã không còn phù hợp với vai trò trung tâm đó nữa.”_
+
+Phân phối chuẩn còn được gọi là **phân phối Gauss (Gaussian distribution)**, theo tên của Carl Friedrich Gauss — một nhà toán học kiệt xuất người Đức vào cuối thế kỷ 18 và đầu thế kỷ 19. Trước đây, phân phối chuẩn cũng từng được gọi là **phân phối sai số (error distribution)**. Trong thống kê, sai số là sự khác biệt giữa giá trị thực tế và một ước lượng thống kê như trung bình mẫu. Ví dụ, **độ lệch chuẩn** được xây dựng dựa trên các sai số so với trung bình của dữ liệu. Việc Gauss phát triển phân phối chuẩn bắt nguồn từ nghiên cứu của ông về **sai số trong các phép đo thiên văn**, vốn được phát hiện là tuân theo phân phối chuẩn.
+
+## **Phân phối chuẩn tắc (Standard Normal) và QQ-Plot**
+
+Phân phối chuẩn tắc là một phân phối chuẩn trong đó các đơn vị trên trục hoành (x-axis) được biểu diễn theo **số độ lệch chuẩn so với giá trị trung bình**. Để so sánh dữ liệu với phân phối chuẩn tắc, ta **lấy mỗi giá trị trừ đi trung bình rồi chia cho độ lệch chuẩn**; quá trình này còn được gọi là **chuẩn hóa (normalization hoặc standardization)** (xem “Standardization (Normalization, z-Scores)” ở trang 243). Lưu ý rằng “chuẩn hóa” theo nghĩa này **không liên quan** đến việc chuẩn hóa bản ghi trong cơ sở dữ liệu (tức chuyển dữ liệu về cùng một định dạng).
+
+Giá trị sau khi biến đổi được gọi là **z-score**, và phân phối chuẩn đôi khi cũng được gọi là **phân phối z (z-distribution)**.
+
+---
+
+**QQ-Plot** được sử dụng để **đánh giá trực quan mức độ gần đúng** giữa phân phối của một mẫu và một phân phối được chỉ định — trong trường hợp này là phân phối chuẩn. Trong QQ-Plot, các **z-score được sắp xếp từ nhỏ đến lớn** và mỗi z-score được vẽ trên trục tung (y-axis); trục hoành (x-axis) là **phân vị tương ứng của phân phối chuẩn** tại thứ hạng đó. Vì dữ liệu đã được chuẩn hóa, nên các đơn vị trên biểu đồ tương ứng với **số độ lệch chuẩn so với trung bình**.
+
+Nếu các điểm dữ liệu **xấp xỉ nằm trên đường chéo**, ta có thể coi phân phối của mẫu là **gần với phân phối chuẩn**. Hình 2-11 minh họa một QQ-Plot cho một mẫu gồm 100 giá trị được sinh ngẫu nhiên từ phân phối chuẩn; đúng như kỳ vọng, các điểm bám rất sát đường chéo.
+![[image-361.png]]
+
+Trong Python, có thể sử dụng phương thức `scipy.stats.probplot` để tạo QQ-Plot:
+
+`fig, ax = plt.subplots(figsize=(4, 4)) norm_sample = stats.norm.rvs(size=100) stats.probplot(norm_sample, plot=ax)`
+
+Việc **chuyển dữ liệu sang z-score** (tức chuẩn hóa dữ liệu) **không làm cho dữ liệu trở thành phân phối chuẩn**. Nó chỉ đưa dữ liệu về **cùng một thang đo** với phân phối chuẩn tắc, chủ yếu nhằm mục đích so sánh.
+
+---
+Ví dụ ứng dụng: data drift trong production ML (Đọc thêm [[M06W3. 5 Grafana Prometheus for Tracking and Logging]])
+Một kịch bản rất quen thuộc trong thực tế triển khai AI/ML là như sau:  
+mô hình của bạn được huấn luyện cẩn thận, validate ổn, deploy lên production và hoạt động rất tốt trong những tháng đầu. Các chỉ số như accuracy, AUC hay business KPI đều đạt kỳ vọng. Tuy nhiên, sau khoảng 4–6 tháng, hiệu năng bắt đầu suy giảm một cách âm thầm. Không có lỗi hệ thống, không có thay đổi code, nhưng mô hình đoán sai nhiều hơn.
+
+Câu hỏi đầu tiên mà một data scientist cần đặt ra không phải là ""model có overfit không?”_, mà là:
+
+> **Dữ liệu hiện tại còn giống dữ liệu dùng để huấn luyện mô hình hay không?**
+
+Đây chính là bài toán **data drift / concept drift** trong production ML.
+
+Trong hệ thống thực tế, các feature thường có:
+
+- Đơn vị đo khác nhau (VNĐ, lần, phút, số ngày…)
+    
+- Scale thay đổi theo thời gian (giá cả tăng, hành vi người dùng thay đổi)
+    
+
+Nếu so sánh trực tiếp giá trị thô giữa dữ liệu train và production, ta rất dễ bị đánh lừa bởi:
+
+- Lạm phát
+    
+- Thay đổi sản phẩm
+    
+- Thay đổi tập người dùng
+    
+
+Giải pháp hiệu quả là **đưa mọi feature về cùng một hệ quy chiếu thống kê**, và z-score làm rất tốt vai trò này.
+
+Với **mỗi feature**, quy trình thường được thực hiện như sau:
+
+1. **Tính μ (mean) và σ (standard deviation) trên dữ liệu train**  
+    
+2. **Chuẩn hóa dữ liệu train sang z-score**  
+    
+3. **Chuẩn hóa dữ liệu production sang z-score, nhưng vẫn dùng μ, σ của train**  
+    Điều này rất quan trọng, vì ta đang hỏi:
+    
+    > “Dữ liệu mới đang lệch bao nhiêu so với thế giới mà mô hình từng biết?”
+    
+4. **So sánh phân phối z-score giữa train và production**, thay vì so sánh giá trị gốc.
+
+## Cách tính casio PP chuẩn
+Phần hướng dẫn sau có thể giúp các bạn sau này đỡ phải đi tra bảng phân phối chuẩn mà chỉ cần bấm Casio
+
+Chiều cao sinh viên có phân phối chuẩn
+$X \sim \mathcal{N}(\mu = 165,\ \sigma = 6)$
+Tính xác suất một sinh viên **cao dưới 170 cm**.
+Cách bấm Casio
+
+1. `MENU`
+    
+2. Chọn `DIST`
+    
+3. Chọn `Normal CD`
+    
+4. Nhập:
+    
+    - **Lower** = `-1E99`
+        
+    - **Upper** = `170`
+        
+    - **μ** = `165`
+        
+    - **σ** = `6`
+        
+    $P(X < 170) \approx 0.7977$
+
+Bài 2: Tính xác suất sinh viên **cao trên 180 cm**.
+Cách bấm Casio
+
+`DIST → Normal CD`
+
+- **Lower** = `180`
+    
+- **Upper** = `1E99`
+    
+- **μ** = `165`
+    
+- **σ** = `6`
+    
+- `EXE`
+
+Bài 3: Xác suất sinh viên cao **từ 160 cm đến 170 cm**?
+`DIST → Normal CD`
+
+- **Lower** = `160`
+    
+- **Upper** = `170`
+    
+- **μ** = `165`
+    
+- **σ** = `6`
+    
+Bài 4: Tìm chiều cao h sao cho 90% sinh viên thấp hơn h.
+- `MENU`
+    
+- `DIST`
+    
+- `Normal PD`
+    
+- Nhập:
+    
+    - **Area** = `0.9`
+        
+    - **μ** = `165`
+        
+    - **σ** = `6`
+
+Bài 5: Chuẩn hóa z-score
+Một sinh viên cao **175 cm**, hỏi cao hơn bao nhiêu % sinh viên khác?
+
+Chuẩn hóa: $z = \frac{175 - 165}{6} \approx 1.67$
+`DIST → Normal CD`
+
+- Lower = `-1E99`
+    
+- Upper = `1.67`
+    
+- μ = `0`
+    
+- σ = `1`
+    
+$P(Z < 1.67) \approx 0.9525$
+
+
+
+
+## Ý chính mục 6
+
+- Phân phối chuẩn đóng vai trò then chốt trong lịch sử phát triển của thống kê vì nó cho phép **xấp xỉ toán học** đối với sự không chắc chắn và biến thiên.
+    
+- Mặc dù dữ liệu thô thường **không tuân theo phân phối chuẩn**, nhưng **sai số**, cũng như **trung bình và tổng** trong các mẫu lớn, thường có dạng gần chuẩn.
+    
+- Để chuyển dữ liệu sang z-score, ta **lấy giá trị trừ trung bình rồi chia cho độ lệch chuẩn**; từ đó có thể so sánh dữ liệu với phân phối chuẩn.
+
+# 7. Phân phối đuôi dài (Long-Tailed Distributions)
+
+Mặc dù phân phối chuẩn có vai trò rất quan trọng trong lịch sử thống kê, nhưng trái với ý nghĩa của cái tên, **dữ liệu trong thực tế nói chung không tuân theo phân phối chuẩn**.
+
+**Các thuật ngữ chính trong phân phối đuôi dài**
+
+**Tail (đuôi)**  
+Phần hẹp và kéo dài của phân phối tần suất, nơi các giá trị tương đối cực đoan xuất hiện với tần suất thấp.
+
+**Skew (độ lệch)**  
+Hiện tượng một bên đuôi của phân phối dài hơn bên còn lại.
+
+Trong khi phân phối chuẩn thường phù hợp và hữu ích khi mô tả **phân phối của sai số** hoặc **phân phối của các thống kê mẫu**, thì nó **hiếm khi mô tả đúng phân phối của dữ liệu thô**. Đôi khi, phân phối dữ liệu bị lệch mạnh (không đối xứng), ví dụ như dữ liệu thu nhập; hoặc phân phối có dạng rời rạc, như dữ liệu nhị phân (binomial). Cả phân phối đối xứng lẫn không đối xứng đều có thể có **đuôi dài**.
+
+Phần đuôi của một phân phối tương ứng với các **giá trị cực đoan** (rất nhỏ hoặc rất lớn). Đuôi dài và việc phải cẩn trọng với chúng là điều được thừa nhận rộng rãi trong thực hành. Nassim Taleb đã đề xuất **thuyết “Thiên nga đen” (black swan theory)**, theo đó các sự kiện bất thường — như sụp đổ thị trường chứng khoán — có khả năng xảy ra cao hơn nhiều so với những gì phân phối chuẩn dự đoán.
+
+Một ví dụ điển hình để minh họa bản chất đuôi dài của dữ liệu là **lợi suất cổ phiếu**. Hình 2-12 cho thấy QQ-Plot của lợi suất cổ phiếu Netflix (NFLX) theo ngày.
+![[image-362.png]]
+
+```Python
+nflx = sp500_px.NFLX
+nflx = np.diff(np.log(nflx[nflx>0]))
+
+fig, ax = plt.subplots(figsize=(4, 4))
+stats.probplot(nflx, plot=ax)
+
+```
+
+Trái ngược với Hình ở Mục 6, các điểm trong QQ-Plot này nằm **rất thấp so với đường chéo ở phía giá trị nhỏ** và **rất cao ở phía giá trị lớn**, cho thấy dữ liệu **không tuân theo phân phối chuẩn**. Điều này có nghĩa là chúng ta **có nhiều khả năng quan sát các giá trị cực đoan hơn** so với trường hợp dữ liệu phân phối chuẩn.
+
+Hình này còn cho thấy một hiện tượng phổ biến khác: các điểm dữ liệu **gần với đường chéo trong khoảng một độ lệch chuẩn quanh giá trị trung bình**. Tukey gọi hiện tượng này là dữ liệu **“chuẩn ở phần giữa” (normal in the middle)** nhưng có **đuôi dài hơn nhiều** (xem [Tukey-1987]).
+
+---
+**Thảo luận:**
+Có rất nhiều tài liệu thống kê bàn về việc **khớp phân phối xác suất với dữ liệu quan sát được**. Cần thận trọng với cách tiếp cận quá “lấy dữ liệu làm trung tâm”, bởi công việc này **vừa là khoa học, vừa là nghệ thuật**. Dữ liệu vốn biến thiên và thật ra thường có thể phù hợp với nhiều dạng và loại phân phối khác nhau. Do đó, **kiến thức miền (domain knowledge) và kiến thức thống kê** thường phải được kết hợp để xác định phân phối nào là phù hợp để mô hình hóa một tình huống cụ thể.
+
+Ví dụ, nếu ta có dữ liệu về **lưu lượng truy cập Internet trên một máy chủ** được đo trong nhiều khoảng thời gian liên tiếp 5 giây, thì việc biết rằng phân phối phù hợp nhất để mô hình hóa **“số sự kiện trên mỗi đơn vị thời gian”** là **phân phối Poisson** sẽ rất hữu ích.
+
+## Ý chính của mục 
+- Phần lớn dữ liệu **không tuân theo phân phối chuẩn**.
+    
+- Việc giả định dữ liệu có phân phối chuẩn có thể dẫn đến **đánh giá thấp các sự kiện cực đoan** (“thiên nga đen”).
+
+# 8. Phân phối t của Student (Student’s t-Distribution)
+
+Phân phối t là một phân phối có dạng gần giống phân phối chuẩn, nhưng **đuôi dày và dài hơn một chút**. Phân phối này được sử dụng rất rộng rãi để mô tả **phân phối của các thống kê mẫu**. Phân phối của **trung bình mẫu** thường có dạng giống phân phối t, và thực tế tồn tại **một họ các phân phối t** khác nhau, phụ thuộc vào **kích thước mẫu**. Kích thước mẫu càng lớn thì phân phối t càng tiến gần tới phân phối chuẩn.
+
+**Các thuật ngữ chính trong phân phối t của Student**
+
+**n**   Kích thước mẫu.
+
+**Bậc tự do (degrees of freedom)**  Một tham số cho phép phân phối t điều chỉnh theo kích thước mẫu, loại thống kê và số lượng nhóm.
+
+---
+
+Phân phối t thường được gọi là **Student’s t** vì nó được công bố năm 1908 trên tạp chí _Biometrika_ bởi W. S. Gosset dưới bút danh “Student”. Chủ lao động của Gosset — hãng bia Guinness — không muốn đối thủ biết rằng họ đang sử dụng các phương pháp thống kê, nên yêu cầu Gosset không dùng tên thật khi xuất bản bài báo.
+
+Gosset muốn trả lời câu hỏi:  
+**“Phân phối lấy mẫu của trung bình một mẫu, được rút ra từ một tổng thể lớn hơn, là gì?”**
+
+Ông bắt đầu bằng một thí nghiệm tái lấy mẫu (resampling) — rút ngẫu nhiên các mẫu gồm 4 quan sát từ một tập dữ liệu gồm 3.000 phép đo chiều cao và chiều dài ngón tay giữa bên trái của tội phạm. (Vào thời điểm đó — kỷ nguyên của thuyết ưu sinh — người ta rất quan tâm đến dữ liệu về tội phạm và việc tìm mối liên hệ giữa xu hướng phạm tội với các đặc điểm thể chất hoặc tâm lý.) Gosset vẽ các kết quả đã được chuẩn hóa (z-score) trên trục hoành và tần suất trên trục tung. Song song đó, ông đã suy ra một hàm — ngày nay được gọi là **phân phối t của Student** — và khớp hàm này lên các kết quả mẫu để so sánh (xem Hình 2-13).
+
+---
+
+Nhiều loại thống kê khác nhau, sau khi được chuẩn hóa, có thể được so sánh với phân phối t để **ước lượng khoảng tin cậy** trong bối cảnh có biến thiên do lấy mẫu. Xét một mẫu kích thước n, với trung bình mẫu là x. Nếu s là độ lệch chuẩn mẫu, thì **khoảng tin cậy 90%** quanh trung bình mẫu được cho bởi:
+
+$x \pm t_{n-1,\,0.05} \cdot \frac{s}{\sqrt{n}}$
+
+trong đó $t_{n-1,\,0.05}$ là giá trị thống kê t với $n-1$ bậc tự do (xem [[M02W3.6_Statistic and Its Application#3. Degrees of Freedom|Bậc tự do]]), giá trị này “cắt bỏ” 5% diện tích của phân phối t ở mỗi phía. Phân phối t đã được sử dụng như một chuẩn tham chiếu cho phân phối của trung bình mẫu, hiệu giữa hai trung bình mẫu, các tham số hồi quy và nhiều thống kê khác.
+
+**Quay lại với bàn luận lúc nãy về Ước lượng bằng Bootstrap**
+Nếu năng lực tính toán đã phổ biến rộng rãi vào năm 1908, thì rất có thể thống kê học đã dựa nhiều hơn vào các phương pháp tái lấy mẫu tốn nhiều tính toán ngay từ đầu. Do thiếu máy tính, các nhà thống kê khi đó buộc phải dựa vào toán học và các hàm như phân phối t để xấp xỉ phân phối lấy mẫu. Đến những năm 1980, khi máy tính trở nên phổ biến, các thí nghiệm tái lấy mẫu mới thực sự khả thi trong thực tế; tuy nhiên, vào thời điểm đó, việc sử dụng phân phối t và các phân phối tương tự đã ăn sâu vào sách giáo khoa và phần mềm thống kê.
+
+Độ chính xác của phân phối t trong việc mô tả hành vi của một thống kê mẫu đòi hỏi rằng **phân phối của thống kê đó có dạng gần chuẩn**. Thực tế cho thấy các thống kê mẫu thường có phân phối gần chuẩn, ngay cả khi dữ liệu của tổng thể ban đầu không tuân theo phân phối chuẩn — chính điều này đã dẫn đến việc phân phối t được ứng dụng rộng rãi. (Điều này lại đưa ta quay về hiện tượng được gọi là **định lý giới hạn trung tâm**)
+
+---
+
+Vậy các nhà khoa học dữ liệu cần biết gì về phân phối t và định lý giới hạn trung tâm? **Không cần quá nhiều**. Phân phối t đóng vai trò quan trọng trong suy luận thống kê cổ điển, nhưng không phải là trung tâm trong thực hành khoa học dữ liệu hiện đại. Việc hiểu và định lượng sự không chắc chắn và biến thiên vẫn rất quan trọng, nhưng **bootstrap thực nghiệm** có thể trả lời hầu hết các câu hỏi liên quan đến sai số do lấy mẫu. Tuy nhiên, các nhà khoa học dữ liệu sẽ thường xuyên gặp **thống kê t** trong đầu ra của phần mềm thống kê và các thủ tục thống kê trong R — chẳng hạn như trong A/B testing và hồi quy — vì vậy việc quen thuộc với mục đích của phân phối này là rất hữu ích.
+
+---
+
+## Ý chính của mục
+
+- Phân phối t thực chất là **một họ các phân phối** có hình dạng giống phân phối chuẩn nhưng **đuôi dày hơn**.
+    
+- Phân phối t được sử dụng rộng rãi làm **cơ sở tham chiếu** cho phân phối của trung bình mẫu, chênh lệch giữa hai trung bình mẫu, các tham số hồi quy và nhiều thống kê khác.
+
+# Phân phối nhị thức (Binomial Distribution)
+Các kết quả dạng **có/không (yes/no)** — hay còn gọi là nhị thức — nằm ở trung tâm của phân tích dữ liệu, vì chúng thường là kết quả cuối cùng của một quyết định hoặc một quá trình nào đó: mua/không mua, click/không click, sống/chết, v.v. Trọng tâm để hiểu phân phối nhị thức là khái niệm về **một tập các phép thử**, trong đó mỗi phép thử chỉ có **hai kết quả có thể xảy ra**, với **xác suất xác định**.
+
+Ví dụ, việc tung đồng xu 10 lần là một thí nghiệm nhị thức với 10 phép thử, mỗi phép thử có hai kết quả khả dĩ (sấp hoặc ngửa); xem Hình 2-14. Những kết quả dạng có/không hoặc 0/1 như vậy được gọi là **kết quả nhị phân (binary outcomes)**, và chúng **không nhất thiết phải có xác suất 50/50**. Bất kỳ cặp xác suất nào có tổng bằng 1.0 đều có thể xảy ra. Theo quy ước trong thống kê, kết quả “1” thường được gọi là **kết quả thành công (success)**; đồng thời, cũng rất phổ biến khi gán “1” cho **kết quả hiếm hơn**. Việc dùng từ “thành công” không hàm ý rằng kết quả đó là tốt hay có lợi, mà chỉ nhằm chỉ ra **kết quả mà ta quan tâm**. Ví dụ, vỡ nợ khoản vay hoặc giao dịch gian lận là những sự kiện tương đối hiếm nhưng lại là đối tượng mà ta muốn dự đoán, nên chúng được gán là “1” hoặc “success”.
+
+**Các thuật ngữ chính trong phân phối nhị thức**
+
+**Trial (phép thử)**  
+Một sự kiện có kết quả rời rạc (ví dụ: tung đồng xu).
+
+**Success (thành công)**  
+Kết quả mà ta quan tâm trong một phép thử.  
+Đồng nghĩa: “1” (đối lập với “0”).
+
+**Binomial (nhị thức)**  
+Có hai kết quả.  
+Đồng nghĩa: yes/no, 0/1, nhị phân.
+
+**Binomial trial (phép thử nhị thức)**  
+Một phép thử có hai kết quả.  
+Đồng nghĩa: phép thử Bernoulli.
+
+**Binomial distribution (phân phối nhị thức)**  
+Phân phối của số lần thành công trong x phép thử.  
+Đồng nghĩa: phân phối Bernoulli.
+
+---
+
+Phân phối nhị thức là **phân phối tần suất của số lần thành công (x)** trong **n phép thử**, với **xác suất thành công p** cho mỗi phép thử. Tồn tại **một họ các phân phối nhị thức**, tùy thuộc vào giá trị của n và p. Phân phối nhị thức có thể trả lời những câu hỏi như:
+
+_Nếu xác suất một lượt click chuyển đổi thành mua hàng là 0,02, thì xác suất quan sát được 0 đơn hàng trong 200 lượt click là bao nhiêu?_
+
+Trong Python, mô-đun **scipy. Stats** triển khai nhiều phân phối thống kê. Đối với phân phối nhị thức, ta dùng các hàm **stats. Binom. Pmf** và **stats. Binom. Cdf**:
+
+`stats.binom.pmf(2, n=5, p=0.1) stats.binom.cdf(2, n=5, p=0.1)`
+
+Hàm này trả về giá trị 0,0729 — tức là xác suất quan sát đúng **x = 2** lần thành công trong **5** phép thử, khi xác suất thành công của mỗi phép thử là **p = 0,1**. Với ví dụ ở trên, ta dùng **x = 0**, **size = 200**, và **p = 0,02**. Khi đó, **dbinom** trả về xác suất **0,0176**.
+
+Thông thường, ta quan tâm đến **xác suất có x hoặc ít hơn x lần thành công** trong n phép thử. Trong trường hợp này, ta dùng hàm 
+
+Hàm này trả về **0,9914**, tức là xác suất quan sát **không quá 2 lần thành công** trong 5 phép thử, với xác suất thành công mỗi phép thử là 0,1.
+
+**Cách tính Casio**
+Tỷ lệ chuyển đổi p = 0.02, số lượt click n = 200. Tính xác suất đúng 0 đơn hàng: $X \sim \text{Bin}(200, 0.02),\quad P(X=0)$
+
+Cách bấm Casio (menu DIST)
+
+1. `MENU`
+    
+2. Chọn **DIST**
+    
+3. Chọn **Binomial**
+    
+4. Chọn **Bpd** (Binomial Probability Distribution – PMF)
+    
+
+Nhập lần lượt:
+
+- `x` = `0`
+    
+- `n` = `200`
+    
+- `p` = `0.02`
+    
+
+Nhấn `=`
+Máy trả về $P(X=0)\approx 0.0176$
+
+Xác suất tích lũy nhị thức — CDF
+Tính xác suất **không quá 2 đơn hàng**: $P(X \le 2)$
+
+### Cách bấm Casio (menu DIST)
+
+1. `MENU`
+    
+2. **DIST**
+    
+3. **Binomial**
+    
+4. **Bcd** (Binomial Cumulative Distribution – CDF)
+    
+
+Nhập:
+
+- `x` = `2`
+    
+- `n` = `200`
+    
+- `p` = `0.02`
+    
+
+Nhấn `=`
+
+Máy trả về: $P(X \le 2)\approx 0.991$
+
+---
+
+**Giá trị trung bình** của phân phối nhị thức là **n × p**; bạn cũng có thể hiểu đây là **số lần thành công kỳ vọng** trong n phép thử, với xác suất thành công p.
+
+**Phương sai** của phân phối nhị thức là **n × p × (1 − p)**. Khi số phép thử đủ lớn (đặc biệt khi p gần 0,5), phân phối nhị thức **gần như không thể phân biệt được với phân phối chuẩn**. Trên thực tế, việc tính toán xác suất nhị thức với kích thước mẫu lớn là tốn kém về mặt tính toán, nên hầu hết các thủ tục thống kê sử dụng **phân phối chuẩn với cùng trung bình và phương sai** để xấp xỉ.
+
+---
+
+## Ý chính của mục
+
+- Các kết quả nhị thức rất quan trọng để mô hình hóa, vì chúng đại diện cho những quyết định cơ bản (mua hay không mua, click hay không click, sống hay chết, v.v.).
+    
+- Một phép thử nhị thức là một thí nghiệm có hai kết quả: một với xác suất p và một với xác suất 1 − p.
+    
+- Khi n đủ lớn và p không quá gần 0 hoặc 1, phân phối nhị thức có thể được xấp xỉ bằng phân phối chuẩn.
+
+# 9. **Phân phối Chi-bình phương (Chi-Square Distribution)**
+
+Một ý tưởng quan trọng trong thống kê là **mức độ sai lệch so với kỳ vọng**, đặc biệt trong các bài toán liên quan đến **số lượng (count) theo từng nhóm/loại**. Ở đây, _kỳ vọng_ được hiểu một cách khái quát là **“không có điều gì bất thường hay đáng chú ý trong dữ liệu”** (ví dụ: không có mối tương quan giữa các biến, không có mô hình hay khuynh hướng có thể dự đoán được). Cách diễn đạt này cũng thường được gọi là **giả thuyết không (null hypothesis)** hoặc **mô hình không (null model)** (Sẽ được nhắc đến ở bài Kiểm định giả thuyết sau).
+
+Ví dụ, kiểm tra xem một biến (chẳng hạn biến hàng biểu diễn **giới tính**) có **độc lập** với một biến khác (chẳng hạn biến cột biểu diễn việc **có được thăng chức hay không**) hay không, khi có bảng đếm số lượng quan sát trong từng ô của bảng dữ liệu. Thống kê dùng để đo lường **mức độ mà kết quả quan sát được sai lệch so với kỳ vọng độc lập theo giả thuyết không** chính là **thống kê chi-bình phương (chi-square statistic)**.
+
+Thống kê chi-bình phương được tính bằng cách lấy **chênh lệch giữa giá trị quan sát và giá trị kỳ vọng**, chia cho **căn bậc hai của giá trị kỳ vọng**, rồi **bình phương**, sau đó **cộng lại trên tất cả các nhóm**. Quy trình này giúp **chuẩn hóa thống kê**, để nó có thể được so sánh với một **phân phối tham chiếu**. Nói một cách tổng quát hơn, thống kê chi-bình phương đo lường **mức độ mà một tập giá trị quan sát “phù hợp” với một phân phối đã được giả định trước** — đây chính là một dạng **kiểm định độ phù hợp (goodness-of-fit test)**. Nó đặc biệt hữu ích khi cần xác định xem **nhiều phương án xử lý** (ví dụ một bài toán **A/B/C… test**) có tạo ra các tác động khác nhau hay không.
+
+**Phân phối chi-bình phương** là phân phối của thống kê này khi ta **lặp đi lặp lại việc lấy mẫu từ null model.
+
+- **Giá trị chi-bình phương nhỏ** cho thấy các số đếm quan sát được **phù hợp khá sát** với phân phối kỳ vọng.
+    
+- **Giá trị chi-bình phương lớn** cho thấy các số đếm đó **khác biệt đáng kể** so với những gì ta kỳ vọng.
+    
+
+Tồn tại **nhiều phân phối chi-bình phương khác nhau**, tương ứng với các **bậc tự do (degrees of freedom)** khác nhau (sẽ được giới thiệu ở bài sau).
+
+---
+
+## Ý chính của mục này
+
+- Phân phối chi-bình phương thường được dùng cho các bài toán liên quan đến **số lượng đối tượng hoặc phần tử rơi vào các nhóm phân loại**.
+    
+- Thống kê chi-bình phương đo lường **mức độ sai lệch so với những gì ta mong đợi theo Null model.
+
+# 10. Phân phối F (F-Distribution)
+
+Một quy trình phổ biến trong các thí nghiệm khoa học là **kiểm tra nhiều phương án xử lý (treatments) trên các nhóm khác nhau** — chẳng hạn như so sánh các loại phân bón khác nhau trên các thửa ruộng khác nhau. Điều này tương tự với các bài toán **A/B/C test** được đề cập trong phân phối chi-bình phương, **ngoại trừ việc ở đây ta làm việc với các giá trị đo liên tục**, thay vì số đếm.
+
+Trong bối cảnh này, điều ta quan tâm là **mức độ mà sự khác biệt giữa các giá trị trung bình của các nhóm lớn hơn mức ta có thể kỳ vọng do dao động ngẫu nhiên thông thường**. **Thống kê F (F-statistic)** được dùng để đo lường điều đó, và nó được định nghĩa là **tỷ số giữa độ biến thiên giữa các trung bình nhóm** và **độ biến thiên bên trong từng nhóm** (còn gọi là **độ biến thiên dư**, residual variability).
+
+Sự so sánh này được gọi là **phân tích phương sai (ANOVA)**. **Phân phối của thống kê F** là phân phối tần suất của tất cả các giá trị có thể thu được nếu ta **hoán vị ngẫu nhiên dữ liệu** trong trường hợp **tất cả các trung bình nhóm đều bằng nhau** (tức là theo **mô hình không**, null model). Tồn tại **nhiều phân phối F khác nhau**, tương ứng với các **bậc tự do khác nhau**.
+
+Cách tính thống kê F có thể sẽ được minh họa chi tiết vào tuần sau trong phần ANOVA. 
+
+Ngoài ra, **thống kê F còn được sử dụng trong hồi quy tuyến tính**, để so sánh **phần biến thiên được mô hình hồi quy giải thích** với **tổng biến thiên của dữ liệu**. Trong thực tế, các giá trị F-statistic thường được **tự động tạo ra bởi R và Python** như một phần của các quy trình hồi quy và ANOVA.
+
+---
+
+## Ý chính
+
+- Phân phối F được sử dụng trong các thí nghiệm và mô hình tuyến tính liên quan đến **dữ liệu đo lường liên tục**.
+    
+- Thống kê F so sánh **độ biến thiên do các yếu tố quan tâm gây ra** với **tổng độ biến thiên của dữ liệu**.
+
+# 11. **Phân phối Poisson và các phân phối liên quan**
+
+Nhiều quá trình trong thực tế tạo ra các sự kiện xảy ra **ngẫu nhiên với một tốc độ trung bình xác định** — chẳng hạn như khách truy cập vào một website, hay xe cộ đi vào trạm thu phí (các sự kiện phân bố theo **thời gian**); hoặc các lỗi trên một mét vuông vải, hay số lỗi đánh máy trên mỗi 100 dòng mã (các sự kiện phân bố theo **không gian**).
+
+---
+
+**Các thuật ngữ chính trong phân phối Poisson và các phân phối liên quan**
+
+**Lambda (λ)**  
+Tốc độ (trên mỗi đơn vị thời gian hoặc không gian) mà các sự kiện xảy ra.
+
+**Phân phối Poisson (Poisson distribution)**  
+Phân phối tần suất của **số sự kiện** xảy ra trong các đơn vị thời gian hoặc không gian được lấy mẫu.
+
+**Phân phối mũ (Exponential distribution)**  
+Phân phối tần suất của **thời gian hoặc khoảng cách** từ một sự kiện đến sự kiện kế tiếp.
+
+**Phân phối Weibull (Weibull distribution)**  
+Một dạng tổng quát của phân phối mũ, trong đó **tốc độ xảy ra sự kiện được phép thay đổi theo thời gian**.
+
+---
+
+## Phân phối Poisson
+
+Từ dữ liệu tổng hợp trong quá khứ (ví dụ: số ca nhiễm cúm mỗi năm), ta có thể ước lượng **số sự kiện trung bình trên mỗi đơn vị thời gian hoặc không gian** (chẳng hạn: số ca nhiễm mỗi ngày, hoặc trên mỗi đơn vị điều tra dân số). Ta cũng có thể muốn biết **mức độ biến thiên** của số sự kiện này giữa các đơn vị thời gian/không gian khác nhau.
+
+Phân phối Poisson cho ta biết **phân phối của số sự kiện trên mỗi đơn vị thời gian hoặc không gian** khi ta lấy mẫu nhiều đơn vị như vậy. Nó đặc biệt hữu ích trong các bài toán **xếp hàng (queuing)**, chẳng hạn như:
+
+> _“Cần bao nhiêu năng lực xử lý để có 95% chắc chắn rằng ta xử lý hết lưu lượng Internet đến một máy chủ trong bất kỳ khoảng 5 giây nào?”_
+
+Tham số quan trọng nhất của phân phối Poisson là **λ (lambda)**. Đây là **số sự kiện trung bình** xảy ra trong một khoảng thời gian hoặc không gian xác định. **Phương sai** của phân phối Poisson cũng **bằng λ**.
+
+---
+
+Một kỹ thuật phổ biến là **sinh các số ngẫu nhiên theo phân phối Poisson** để phục vụ cho các mô phỏng xếp hàng. Trong Python (thư viện `scipy`) là **stats.poisson.rvs**:
+
+`stats.poisson.rvs(2, size = 100)`
+
+Đoạn mã này sẽ sinh ra **100 số ngẫu nhiên** từ phân phối Poisson với **λ = 2**. Ví dụ, nếu số cuộc gọi vào bộ phận chăm sóc khách hàng trung bình là **2 cuộc mỗi phút**, thì đoạn mã trên sẽ mô phỏng **100 phút**, và trả về số cuộc gọi trong từng phút của 100 phút đó.
+
+---
+**Ví dụ tính Casio**
+
+Trung bình một tổng đài nhận 1 = 2 cuộc gọi mỗi phút (Poisson). Tính:
+1. P (X = 3): đúng 3 cuộc/phút
+2. P (X ≤ 3): tối đa 3 cuộc/phút
+3. P (X > 4): ít nhất 4 cuộc/phút
+4. Trung bình **2 cuộc/phút**, hỏi $P(X\le 8 \text{ cuộc trong 5 phút})$.
+
+Câu 1:
+- Vào: **DIST → Poisson → Poisson PD**
+    
+- Nhập:
+    
+    - **x = 3**
+        
+    - **λ = 2**
+Câu 2:
+- Vào: **DIST → Poisson → Poisson CD**
+    
+- Nhập:
+    
+    - **x = 3**
+        
+    - **λ = 2**
+        
+Câu 3:
+• Tính P (X ≤ 3) như (2)
+• Sau đó bấm:
+• 1- Ans
+→ ra P (X ≥ 4)
+
+Câu 4:
+$\lambda_{5\ \text{phút}} = 2 \times 5 = 10$
+- Dùng **Poisson CD**
+    
+- Nhập:
+    
+    - **x = 8**
+        
+    - **λ = 10**
+        
+## **Phân phối mũ (Exponential Distribution)**
+
+Sử dụng cùng tham số λ như trong phân phối Poisson, ta cũng có thể mô hình hóa **phân phối của thời gian giữa các sự kiện**: chẳng hạn thời gian giữa các lượt truy cập website, hoặc giữa các xe đến trạm thu phí. Phân phối này cũng được dùng trong kỹ thuật để mô hình hóa **thời gian đến khi hỏng hóc**, và trong quản lý quy trình để mô hình hóa, ví dụ, **thời gian xử lý cho mỗi cuộc gọi dịch vụ**.
+
+Hàm `stats.expon.rvs` của Python (scipy)
+```Python
+stats.expon.rvs(0.2, size=100)
+```
+
+Đoạn mã này sẽ sinh **100 giá trị ngẫu nhiên** từ một phân phối mũ trong đó **tốc độ trung bình của các sự kiện là 0.2 trên mỗi đơn vị thời gian**. Vì vậy, bạn có thể dùng nó để mô phỏng **100 khoảng thời gian (tính bằng phút) giữa các cuộc gọi dịch vụ**, khi tốc độ trung bình của các cuộc gọi đến là **0.2 cuộc/phút**.
+
+Một **giả định then chốt** trong mọi nghiên cứu mô phỏng sử dụng phân phối Poisson hoặc phân phối mũ là **tốc độ** λ **phải không đổi trong suốt khoảng thời gian được xét**. Trên thực tế, giả định này hiếm khi đúng ở quy mô toàn cục; ví dụ, lưu lượng giao thông trên đường hoặc trên mạng dữ liệu thay đổi theo thời điểm trong ngày và theo ngày trong tuần. Tuy nhiên, ta thường có thể **chia thời gian (hoặc không gian) thành các phân đoạn đủ đồng nhất**, sao cho việc phân tích hoặc mô phỏng trong từng phân đoạn đó vẫn hợp lý và có giá trị.
+
+## **Ước lượng tốc độ hỏng hóc (Estimating the Failure Rate)**
+
+Trong nhiều ứng dụng, tốc độ xảy ra sự kiện λ đã biết hoặc có thể ước lượng từ dữ liệu quá khứ. Tuy nhiên, đối với **các sự kiện hiếm**, điều này không hẳn đúng. Ví dụ, **hỏng hóc động cơ máy bay** là sự kiện đủ hiếm (may mắn là như vậy) đến mức, với một loại động cơ cụ thể, có thể **rất ít dữ liệu** để làm cơ sở ước lượng thời gian giữa các lần hỏng. Khi **không có dữ liệu**, gần như không có căn cứ để ước lượng tốc độ xảy ra sự kiện. Dẫu vậy, ta vẫn có thể **đưa ra các phỏng đoán**: chẳng hạn, nếu **không quan sát thấy sự cố nào sau 20 giờ**, ta có thể khá chắc rằng tốc độ không phải là **1 lần/giờ**. Thông qua **mô phỏng** hoặc **tính toán trực tiếp xác suất**, ta có thể đánh giá các tốc độ giả định khác nhau và **ước lượng các ngưỡng** mà dưới đó tốc độ xảy ra sự kiện là **rất khó có khả năng**. Nếu **có một ít dữ liệu nhưng chưa đủ** để cung cấp một ước lượng chính xác và đáng tin cậy, có thể áp dụng **kiểm định độ phù hợp (goodness-of-fit)** (xem “Chi-Square Test” ở trang 124) cho các giá trị tốc độ khác nhau để xác định giá trị nào **phù hợp nhất** với dữ liệu quan sát.
+
+---
+
+## **Phân phối Weibull (Weibull Distribution)**
+
+Trong nhiều trường hợp, **tốc độ xảy ra sự kiện không giữ nguyên theo thời gian**. Nếu khoảng thời gian mà tốc độ thay đổi **dài hơn nhiều** so với khoảng cách điển hình giữa các sự kiện, thì không có vấn đề gì lớn; ta chỉ cần **chia phân tích thành các đoạn** mà trong đó tốc độ tương đối ổn định, như đã đề cập trước đó. Tuy nhiên, nếu **tốc độ thay đổi ngay trong khoảng giữa các sự kiện**, thì các phân phối **mũ (exponential)** hoặc **Poisson** **không còn phù hợp**. Điều này thường xảy ra trong **hỏng hóc cơ khí**—**nguy cơ hỏng tăng dần theo thời gian**.
+
+**Phân phối Weibull** là phần mở rộng của phân phối mũ, trong đó **tốc độ xảy ra sự kiện được phép thay đổi**, được đặc tả bởi **tham số hình dạng**
+
+- Nếu β>1, xác suất xảy ra sự kiện **tăng theo thời gian**.
+    
+- Nếu β<1, xác suất **giảm theo thời gian**.
+    
+
+Do Weibull được dùng cho **phân tích thời gian đến hỏng hóc** (time-to-failure) thay vì tốc độ sự kiện, tham số thứ hai được biểu diễn theo **tuổi thọ đặc trưng**, ký hiệu là η (chữ Hy Lạp _eta_), còn gọi là **tham số tỷ lệ (scale parameter)**.
+
+Với Weibull, bài toán ước lượng bao gồm **hai tham số**:
+
+β và η
+
+. Thông thường, **phần mềm** được sử dụng để mô hình hóa dữ liệu và **ước lượng phân phối Weibull phù hợp nhất**.
+
+Trong Python, dùng hàm `stats.weibull_min.rvs`. Ví dụ, đoạn mã sau sinh **100 giá trị ngẫu nhiên (tuổi thọ)** từ phân phối Weibull với **shape = 1.5** và **tuổi thọ đặc trưng = 5.000**:
+
+`stats.weibull_min.rvs(1.5, scale=5000, size=100)`
+
+---
+
+## **Ý chính của mục**
+
+- Với các sự kiện xảy ra **ở tốc độ không đổi**, số sự kiện trên mỗi đơn vị thời gian hoặc không gian có thể được mô hình hóa bằng **phân phối Poisson**.
+    
+- **Thời gian hoặc khoảng cách giữa hai sự kiện liên tiếp** có thể được mô hình hóa bằng **phân phối mũ**.
+    
+- Khi **tốc độ xảy ra sự kiện thay đổi theo thời gian** (ví dụ, xác suất hỏng thiết bị tăng dần), có thể mô hình hóa bằng **phân phối Weibull**.
+
 
 
