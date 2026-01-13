@@ -139,6 +139,13 @@ Mục tiêu là xác định **điểm đến tìm kiếm** được dự đoán
 
 Hãy xem xét cụm tìm kiếm **“Ricky Ricardo and Little Red Riding Hood.”** Trong những ngày đầu của internet, truy vấn này có lẽ sẽ trả về các kết quả về **Ricky Ricardo** (ban nhạc trưởng), chương trình truyền hình **I Love Lucy**—nơi nhân vật này xuất hiện—và câu chuyện thiếu nhi **Little Red Riding Hood**. Mỗi mục riêng lẻ đều có rất nhiều lượt tìm kiếm để tham chiếu, nhưng **sự kết hợp** của chúng thì lại rất hiếm. Về sau, khi **hàng nghìn tỷ truy vấn** đã được tích lũy, truy vấn này trả về **chính xác tập I Love Lucy** trong đó Ricky kể lại, theo cách kịch tính, câu chuyện Little Red Riding Hood cho con trai sơ sinh của mình, trong một sự pha trộn hài hước giữa tiếng Anh và tiếng Tây Ban Nha.
 
+Ví dụ khác: Khi tìm kiếm "quán cà phê yên tĩnh học bài gần UEH + mở tới 11 h"
+- Dữ liệu ít: trả về các list quán cà phê chung chung
+    
+- Dữ liệu đủ lớn: trả về đúng nhóm kết quả “học bài”, “ổ cắm”, “ít ồn”, “mở khuya”, “gần khu vực X”
+
+**Thông điệp:** Đây là truy vấn “nhiều điều kiện”, mỗi điều kiện riêng lẻ phổ biến nhưng **kết hợp** thì hiếm.
+
 Cần lưu ý rằng **số lượng bản ghi thực sự liên quan**—những bản ghi trong đó truy vấn này, hoặc một truy vấn rất tương tự, xuất hiện (kèm theo thông tin về liên kết mà người dùng cuối cùng đã nhấp)—**chỉ cần ở mức vài nghìn** là có thể đủ hiệu quả. Tuy nhiên, để thu được những bản ghi liên quan đó, cần đến **hàng nghìn tỷ điểm dữ liệu** (và dĩ nhiên, **lấy mẫu ngẫu nhiên sẽ không giúp ích** trong trường hợp này).
 
 ## Sample Mean Versus Population Mean (Trung bình mẫu và trung bình tổng thể)
@@ -378,7 +385,7 @@ Các thư viện Python phổ biến **không cung cấp sẵn** triển khai bo
 
 ---
 
-Bootstrap có thể được áp dụng cho **dữ liệu đa biến**, trong đó **mỗi hàng được lấy mẫu như một quan sát. Khi đó, ta có thể chạy một mô hình trên dữ liệu bootstrap để ước lượng **độ ổn định (độ biến thiên)** của các tham số mô hình, hoặc để **cải thiện năng lực dự báo**. Với **cây phân loại và hồi quy** (decision trees), việc chạy **nhiều cây** trên các mẫu bootstrap rồi **lấy trung bình dự đoán** (hoặc **bỏ phiếu đa số** với bài toán phân loại) thường cho kết quả tốt hơn so với dùng **một cây đơn lẻ**. Quy trình này được gọi là **bagging**. -> Thuật toán Random Forest
+Bootstrap có thể được áp dụng cho **dữ liệu đa biến**, trong đó **mỗi hàng được lấy mẫu như một quan sát. Khi đó, ta có thể chạy một mô hình trên dữ liệu bootstrap để ước lượng độ ổn định (độ biến thiên)** của các tham số mô hình, hoặc để **cải thiện năng lực dự báo**. Với **cây phân loại và hồi quy** (decision trees), việc chạy **nhiều cây** trên các mẫu bootstrap rồi **lấy trung bình dự đoán** (hoặc **bỏ phiếu đa số** với bài toán phân loại) thường cho kết quả tốt hơn so với dùng **một cây đơn lẻ**. Quy trình này được gọi là **bagging**. -> Thuật toán Random Forest
 
 ---
 
@@ -706,6 +713,51 @@ Trong khi phân phối chuẩn thường phù hợp và hữu ích khi mô tả 
 
 Phần đuôi của một phân phối tương ứng với các **giá trị cực đoan** (rất nhỏ hoặc rất lớn). Đuôi dài và việc phải cẩn trọng với chúng là điều được thừa nhận rộng rãi trong thực hành. Nassim Taleb đã đề xuất **thuyết “Thiên nga đen” (black swan theory)**, theo đó các sự kiện bất thường — như sụp đổ thị trường chứng khoán — có khả năng xảy ra cao hơn nhiều so với những gì phân phối chuẩn dự đoán.
 
+**Lý thuyết Thiên Nga Đen** do **Nassim Nicholas Taleb** đề xuất nhằm mô tả những **sự kiện hiếm gặp nhưng có tác động cực lớn**, thường **không thể dự đoán bằng các mô hình thống kê truyền thống**, đặc biệt là các mô hình **giả định phân phối chuẩn**.
+
+---
+
+### **Vì sao gọi là “Thiên Nga Đen”?**
+
+- Trước thế kỷ 17, người châu Âu tin rằng **mọi con thiên nga đều màu trắng**.
+    
+- Việc phát hiện **thiên nga đen** tại Úc đã **phá vỡ một niềm tin tưởng chừng chắc chắn**.
+    
+- Ẩn dụ này cho thấy: **chỉ một quan sát mới** cũng đủ **lật đổ** một giả định lâu nay.
+    
+
+---
+
+### **Ba đặc trưng cốt lõi của một Thiên Nga Đen**
+
+1. **Tính hiếm (Rarity)**
+    
+    - Sự kiện **rất ít khi xảy ra** theo kinh nghiệm quá khứ.
+        
+    - Các mô hình dựa trên dữ liệu lịch sử thường **không dự báo được**.
+        
+2. **Tác động lớn (Extreme Impact)**
+    
+    - Khi xảy ra, hậu quả **rất nghiêm trọng**: tài chính, xã hội, công nghệ.
+        
+3. **Hợp lý hóa sau sự kiện (Retrospective Rationalization)**
+    
+    - Sau khi sự kiện xảy ra, con người có xu hướng nói rằng  
+        _“lẽ ra phải thấy trước”_, dù trước đó **không ai dự đoán được**.
+        
+
+---
+
+### **Ví dụ điển hình**
+
+- Khủng hoảng tài chính toàn cầu 2008
+    
+- Đại dịch COVID-19
+    
+- Sự sụp đổ đột ngột của các tập đoàn lớn
+    
+- Một nội dung mạng xã hội **bùng nổ viral** ngoài mọi dự đoán
+
 Một ví dụ điển hình để minh họa bản chất đuôi dài của dữ liệu là **lợi suất cổ phiếu**. Hình 2-12 cho thấy QQ-Plot của lợi suất cổ phiếu Netflix (NFLX) theo ngày.
 ![[image-362.png]]
 
@@ -769,6 +821,19 @@ Nếu năng lực tính toán đã phổ biến rộng rãi vào năm 1908, thì
 
 Vậy các nhà khoa học dữ liệu cần biết gì về phân phối t và định lý giới hạn trung tâm? **Không cần quá nhiều**. Phân phối t đóng vai trò quan trọng trong suy luận thống kê cổ điển, nhưng không phải là trung tâm trong thực hành khoa học dữ liệu hiện đại. Việc hiểu và định lượng sự không chắc chắn và biến thiên vẫn rất quan trọng, nhưng **bootstrap thực nghiệm** có thể trả lời hầu hết các câu hỏi liên quan đến sai số do lấy mẫu. Tuy nhiên, các nhà khoa học dữ liệu sẽ thường xuyên gặp **thống kê t** trong đầu ra của phần mềm thống kê và các thủ tục thống kê trong R — chẳng hạn như trong A/B testing và hồi quy — vì vậy việc quen thuộc với mục đích của phân phối này là rất hữu ích.
 
+![[image-363.png]]
+
+- **Các đường xám**:  
+    → **Phân phối các thống kê t từ từng mẫu bootstrap**  
+    (mỗi đường xám là một bootstrap resample)
+    
+- **Đường đen (empirical T)**:  
+    → **Phân phối lấy mẫu thực nghiệm**, được **tổng hợp từ các bootstrap samples**  
+    → Có thể hiểu là **ước lượng trơn (smoothed estimate)** của sampling distribution **dựa trên bootstrap**
+    
+- **Đường đỏ (theoretical T)**:  
+    → **Phân phối t lý thuyết** (Student’s t), tính bằng công thức
+
 ---
 
 ## Ý chính của mục
@@ -777,7 +842,7 @@ Vậy các nhà khoa học dữ liệu cần biết gì về phân phối t và 
     
 - Phân phối t được sử dụng rộng rãi làm **cơ sở tham chiếu** cho phân phối của trung bình mẫu, chênh lệch giữa hai trung bình mẫu, các tham số hồi quy và nhiều thống kê khác.
 
-# Phân phối nhị thức (Binomial Distribution)
+# 9. Phân phối nhị thức (Binomial Distribution)
 Các kết quả dạng **có/không (yes/no)** — hay còn gọi là nhị thức — nằm ở trung tâm của phân tích dữ liệu, vì chúng thường là kết quả cuối cùng của một quyết định hoặc một quá trình nào đó: mua/không mua, click/không click, sống/chết, v.v. Trọng tâm để hiểu phân phối nhị thức là khái niệm về **một tập các phép thử**, trong đó mỗi phép thử chỉ có **hai kết quả có thể xảy ra**, với **xác suất xác định**.
 
 Ví dụ, việc tung đồng xu 10 lần là một thí nghiệm nhị thức với 10 phép thử, mỗi phép thử có hai kết quả khả dĩ (sấp hoặc ngửa); xem Hình 2-14. Những kết quả dạng có/không hoặc 0/1 như vậy được gọi là **kết quả nhị phân (binary outcomes)**, và chúng **không nhất thiết phải có xác suất 50/50**. Bất kỳ cặp xác suất nào có tổng bằng 1.0 đều có thể xảy ra. Theo quy ước trong thống kê, kết quả “1” thường được gọi là **kết quả thành công (success)**; đồng thời, cũng rất phổ biến khi gán “1” cho **kết quả hiếm hơn**. Việc dùng từ “thành công” không hàm ý rằng kết quả đó là tốt hay có lợi, mà chỉ nhằm chỉ ra **kết quả mà ta quan tâm**. Ví dụ, vỡ nợ khoản vay hoặc giao dịch gian lận là những sự kiện tương đối hiếm nhưng lại là đối tượng mà ta muốn dự đoán, nên chúng được gán là “1” hoặc “success”.
@@ -888,7 +953,7 @@ Máy trả về: $P(X \le 2)\approx 0.991$
     
 - Khi n đủ lớn và p không quá gần 0 hoặc 1, phân phối nhị thức có thể được xấp xỉ bằng phân phối chuẩn.
 
-# 9. **Phân phối Chi-bình phương (Chi-Square Distribution)**
+# 10. **Phân phối Chi-bình phương (Chi-Square Distribution)**
 
 Một ý tưởng quan trọng trong thống kê là **mức độ sai lệch so với kỳ vọng**, đặc biệt trong các bài toán liên quan đến **số lượng (count) theo từng nhóm/loại**. Ở đây, _kỳ vọng_ được hiểu một cách khái quát là **“không có điều gì bất thường hay đáng chú ý trong dữ liệu”** (ví dụ: không có mối tương quan giữa các biến, không có mô hình hay khuynh hướng có thể dự đoán được). Cách diễn đạt này cũng thường được gọi là **giả thuyết không (null hypothesis)** hoặc **mô hình không (null model)** (Sẽ được nhắc đến ở bài Kiểm định giả thuyết sau).
 
@@ -905,6 +970,76 @@ Thống kê chi-bình phương được tính bằng cách lấy **chênh lệch
 
 Tồn tại **nhiều phân phối chi-bình phương khác nhau**, tương ứng với các **bậc tự do (degrees of freedom)** khác nhau (sẽ được giới thiệu ở bài sau).
 
+![[image-364.png]]
+Ý nghĩa của công thức
+
+- Lấy **chênh lệch** giữa quan sát và kỳ vọng
+    
+- **Chuẩn hóa** bằng cách chia cho
+    
+    EEE
+    
+- **Bình phương** để:
+    
+    - loại bỏ dấu âm
+        
+    - phạt mạnh các sai lệch lớn
+        
+- **Cộng trên tất cả các ô**
+    
+
+→ Ta thu được **một con số duy nhất** đo mức độ “không phù hợp” với null model.
+
+---
+
+5. Diễn giải giá trị Chi-square
+
+- **χ2\chi^2χ2**
+    
+    **nhỏ**  
+    → Dữ liệu quan sát **phù hợp tốt** với kỳ vọng  
+    → Không có bằng chứng rõ ràng chống lại giả thuyết không
+    
+- **χ2\chi^2χ2**
+    
+    **lớn**  
+    → Sai lệch giữa quan sát và kỳ vọng **rất lớn**  
+    → Có dấu hiệu cho thấy:
+    
+    - các biến **không độc lập**
+        
+    - hoặc mô hình giả định **không đúng**
+        
+
+---
+
+### 6. Phân phối Chi-square là gì?
+
+Phân phối chi-bình phương là:
+
+> **Phân phối của thống kê**
+> 
+> **χ2\chi^2χ2**
+> 
+>   
+> khi ta **lặp đi lặp lại việc lấy mẫu từ null model**
+
+Nói cách khác:
+
+- Nếu thế giới thật sự **không có hiệu ứng**
+    
+- Nhưng ta lấy mẫu ngẫu nhiên nhiều lần
+    
+- Thì các giá trị
+    
+    χ2\chi^2χ2
+    
+    thu được sẽ phân bố theo **chi-square distribution**
+![[image-365.png]]
+![[image-367.png]]
+![[image-368.png]]
+
+
 ---
 
 ## Ý chính của mục này
@@ -913,7 +1048,7 @@ Tồn tại **nhiều phân phối chi-bình phương khác nhau**, tương ứn
     
 - Thống kê chi-bình phương đo lường **mức độ sai lệch so với những gì ta mong đợi theo Null model.
 
-# 10. Phân phối F (F-Distribution)
+# 11. Phân phối F (F-Distribution)
 
 Một quy trình phổ biến trong các thí nghiệm khoa học là **kiểm tra nhiều phương án xử lý (treatments) trên các nhóm khác nhau** — chẳng hạn như so sánh các loại phân bón khác nhau trên các thửa ruộng khác nhau. Điều này tương tự với các bài toán **A/B/C test** được đề cập trong phân phối chi-bình phương, **ngoại trừ việc ở đây ta làm việc với các giá trị đo liên tục**, thay vì số đếm.
 
