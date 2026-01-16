@@ -173,5 +173,19 @@ Ta thấy rằng đạo hàm của ReLU không liên tục ở x=0, từ đây d
 
 
 
-
+Đọc thêm [ConvMAE: Masked Convolution Meets Masked Autoencoders](https://arxiv.org/pdf/2205.03892)
 # 3. ConvNeXt V2
+
+## Comparison
+
+![[image-404.png]]
+
+
+![[image-405.png]]
+
+
+
+
+## GRN block
+
+![[image-406.png]]
